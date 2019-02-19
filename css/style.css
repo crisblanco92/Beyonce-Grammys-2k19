@@ -2,3 +2,33 @@
     margin: 0 auto;
     overflow: hidden;
 }
+
+body {
+    text-align: center;
+    font-family: 'VT323', monospace;
+  
+  }
+
+  
+body button {
+    font-family: 'VT323', monospace;
+    font-size: 30px;
+    background-color: yellow;
+    color: #000;
+    padding: 10px 20px;
+    border: 30;
+
+    box-shadow: 10;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
+
+/* 
+.inicio {
+
+    width: 500px;
+    height: 500px;
+    background-color: red;
+}
+   */

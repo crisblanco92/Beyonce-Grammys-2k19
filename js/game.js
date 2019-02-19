@@ -48,9 +48,11 @@ var Game = {
       }
     }.bind(this), 1000 / this.fps);
   },
+
   stop: function () {
     clearInterval(this.interval);
   },
+  
   //fin del juego
   gameOver: function () {
     this.stop();
@@ -60,6 +62,8 @@ var Game = {
       this.start();
     }
   },
+
+
   //reseteamos todos los elementos del juego para empezar en un estado limpio
   reset: function () {
     this.background = new Background(this);
@@ -69,6 +73,8 @@ var Game = {
     this.obstacles = [];
     this.score = 0;
   },
+
+  
   //chequea si ha sucedido una colisión
   isCollision: function () {
     // colisiones genéricas 
@@ -82,20 +88,28 @@ var Game = {
       );
     }.bind(this));
   },
+
+
   //esto elimina los obstáculos del array que estén fuera de la pantalla
   clearObstacles: function () {
     this.obstacles = this.obstacles.filter(function (obstacle) {
       return obstacle.x >= 0;
     });
   },
+
+
   //generamos nuevos obstáculos
   generateObstacle: function () {
     this.obstacles.push(new Obstacle(this));
   },
+
+
   //limpieza de la pantalla
   clear: function () {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   },
+
+
   //dibuja todos los assets del juego
   drawAll: function () {
     this.background.draw();
@@ -103,12 +117,16 @@ var Game = {
     this.obstacles.forEach(function (obstacle) { obstacle.draw(); });
     this.drawScore();
   },
+
+
   //mueve todos los objetos del escenario, el fondo, el jugador y los obstáculos
   moveAll: function () {
     this.background.move();
     this.player.move();
     this.obstacles.forEach(function (obstacle) { obstacle.move(); });
   },
+
+
   //pinta el marcador
   drawScore: function () {
     this.scoreBoard.update(this.score, this.ctx)
