@@ -55,27 +55,32 @@ var Game = {
         this.drawAll();
 
 
-      if (this.isCollision()) {
+      if (this.isCollision(this.obstaclesGrammy)) {
         this.score += 20
         return
       }
 
-      if(this.isCollision2()){
+      if(this.isCollision(this.obstaclesFakeGrammy)){
         this.score -= 20;
         return 
       }  
 
-      if(this.isCollision3()){
+      if(this.isCollision(this.obstaclesMicrophone)){
         this.score += 50
         return 
       }  
 
-      if(this.isCollision4()){
+      if(this.isCollision(this.obstaclesKanye)){
         this.gameOver();
       }  
+
+      this.checkScore();
+
+
     
     }.bind(this), 1000 / this.fps);
   },
+  
 
   stop: function () {
     clearInterval(this.interval);
@@ -94,26 +99,30 @@ var Game = {
   //reseteamos todos los elementos del juego para empezar en un estado limpio
   reset: function () {
     this.background = new Background(this);
+    this.publicBackground = new PublicBackground(this);
     this.player = new Player(this);
     this.scoreBoard = ScoreBoard
     this.framesCounter = 0;
-    this.obstacles = [new Obstacle(this)];
-    this.obstacles2 = [new Obstacle2(this)]
-    this.obstacles3 = []
-    this.obstacles4 = []
+    this.obstaclesGrammy = [new Obstacle(this)];
+    this.obstaclesFakeGrammy = [new Obstacle2(this)]
+    this.obstaclesMicrophone = []
+    this.obstaclesKanye = []
     this.score = 0;
+    this.scoreObj = 40; // OBJETIVO
   },
 
 
   //dibuja todos los assets del juego
   drawAll: function () {
     this.background.draw();
+    this.publicBackground.draw();
     this.player.draw();
-    this.obstacles.forEach(function (obstacle) { obstacle.draw(); });
-    this.obstacles2.forEach(function (obstacle) { obstacle.draw(); });
-    this.obstacles3.forEach(function (obstacle) { obstacle.draw(); });
-    this.obstacles4.forEach(function (obstacle) { obstacle.draw(); });
+    this.obstaclesGrammy.forEach(function (obstacle) { obstacle.draw(); });
+    this.obstaclesFakeGrammy.forEach(function (obstacle) { obstacle.draw(); });
+    this.obstaclesMicrophone.forEach(function (obstacle) { obstacle.draw(); });
+    this.obstaclesKanye.forEach(function (obstacle) { obstacle.draw(); });
     this.drawScore();
+    
   },
 
 
@@ -121,34 +130,33 @@ var Game = {
   moveAll: function () {
     this.player._moveBeyonce();
     this.player.move();
-    this.obstacles.forEach(function (obstacle) { obstacle.move(); });
-    this.obstacles2.forEach(function (obstacle) { obstacle.move(); });
-    this.obstacles3.forEach(function (obstacle) { obstacle.move(); });
-    this.obstacles3.forEach(function (obstacle) { obstacle.move(); });
-    this.obstacles4.forEach(function (obstacle) { obstacle.move(); });
+    this.obstaclesGrammy.forEach(function (obstacle) { obstacle.move(); });
+    this.obstaclesFakeGrammy.forEach(function (obstacle) { obstacle.move(); });
+    this.obstaclesMicrophone.forEach(function (obstacle) { obstacle.move(); });
+    this.obstaclesKanye.forEach(function (obstacle) { obstacle.move(); });
 
   },
 
 
   //generamos nuevos obstáculos
   generateObstacle: function () {
-    this.obstacles.push(new Obstacle(this));
-    this.obstacles2.push(new Obstacle2(this));
+    this.obstaclesGrammy.push(new Obstacle(this));
+    this.obstaclesFakeGrammy.push(new Obstacle2(this));
   },
 
   generateObstacleJay: function () {
-    this.obstacles3.push(new Obstacle3(this));
+    this.obstaclesMicrophone.push(new Obstacle3(this));
   },
 
   generateObstacleKanye: function () {
-    this.obstacles4.push(new Obstacle4(this));
+    this.obstaclesKanye.push(new Obstacle4(this));
   },
 
 
     //chequea si ha sucedido una colisión CON GRAMMYS BUENOS
-  isCollision: function () {
+  isCollision: function (collision) {
 
-      var resultado = this.obstacles.some(function (obstacle, index) {
+      var resultado = collision.some(function (obstacle, index) {
         //console.log(this.player, obstacle)
         var resultadoParcial = (
             ((this.player.x + this.player.w) >= obstacle.x) &&
@@ -160,7 +168,7 @@ var Game = {
 
           //console.log('el resultado parcial de ', obstacle, ' es ', resultadoParcial)
 
-          if (resultadoParcial) this.deleteObstacle(index);
+          if (resultadoParcial) this.deleteObstacle(index, collision);
 
           return resultadoParcial;
         }.bind(this));
@@ -169,109 +177,109 @@ var Game = {
     },
 
   // borra los obstaculos cuando hay colisión DE GRAMMYS BUENOS
-  deleteObstacle: function(index) {
+  deleteObstacle: function(index, collision) {
     //console.log('vamos a borrar el obstaculo en el indice ', index)
-    this.obstacles.splice(index, 1)
+    collision.splice(index, 1)
     console.log("he borrado el indice " + index)
     },
 
 
-  //chequea si ha sucedido una colisión CON GRAMMYS MALOS
-  isCollision2: function () {
+//   //chequea si ha sucedido una colisión CON GRAMMYS MALOS
+//   isCollision2: function () {
 
-      var resultado = this.obstacles2.some(function (obstacle, index) {
-        //console.log(this.player, obstacle)
-        var resultadoParcial = (
-            ((this.player.x + this.player.w) >= obstacle.x) &&
-            ((obstacle.x + obstacle.w) > this.player.x) &&
-            ((this.player.y + this.player.h) > obstacle.y) &&
-            ((obstacle.y + obstacle.h) > this.player.y)
+//       var resultado = this.obstacles2.some(function (obstacle, index) {
+//         //console.log(this.player, obstacle)
+//         var resultadoParcial = (
+//             ((this.player.x + this.player.w) >= obstacle.x) &&
+//             ((obstacle.x + obstacle.w) > this.player.x) &&
+//             ((this.player.y + this.player.h) > obstacle.y) &&
+//             ((obstacle.y + obstacle.h) > this.player.y)
           
-          ); //console.log(this.player, obstacle)
+//           ); //console.log(this.player, obstacle)
 
-          //console.log('el resultado parcial de ', obstacle, ' es ', resultadoParcial)
+//           //console.log('el resultado parcial de ', obstacle, ' es ', resultadoParcial)
 
-          if (resultadoParcial) this.deleteObstacle2(index);
+//           if (resultadoParcial) this.deleteObstacle2(index);
 
-          return resultadoParcial;
-        }.bind(this));
-        //console.log(resultado)
-        return resultado;
-    }, 
+//           return resultadoParcial;
+//         }.bind(this));
+//         //console.log(resultado)
+//         return resultado;
+//     }, 
   
 
-  // borra los obstaculos cuando hay colisión DE GRAMMYS MALOS
-  deleteObstacle2: function(index) {
-      //console.log('vamos a borrar el obstaculo en el indice ', index)
-      this.obstacles2.splice(index, 1)
-      console.log("he borrado el indice " + index)
-      },
+//   // borra los obstaculos cuando hay colisión DE GRAMMYS MALOS
+//   deleteObstacle2: function(index) {
+//       //console.log('vamos a borrar el obstaculo en el indice ', index)
+//       this.obstacles2.splice(index, 1)
+//       console.log("he borrado el indice " + index)
+//       },
 
 
 
-//chequea si ha sucedido una colisión CON JAY Z
-isCollision3: function () {
+// //chequea si ha sucedido una colisión CON JAY Z
+// isCollision3: function () {
 
-  var resultado = this.obstacles3.some(function (obstacle, index) {
-    //console.log(this.player, obstacle)
-    var resultadoParcial = (
-        ((this.player.x + this.player.w) >= obstacle.x) &&
-        ((obstacle.x + obstacle.w) > this.player.x) &&
-        ((this.player.y + this.player.h) > obstacle.y) &&
-        ((obstacle.y + obstacle.h) > this.player.y)
+//   var resultado = this.obstacles3.some(function (obstacle, index) {
+//     //console.log(this.player, obstacle)
+//     var resultadoParcial = (
+//         ((this.player.x + this.player.w) >= obstacle.x) &&
+//         ((obstacle.x + obstacle.w) > this.player.x) &&
+//         ((this.player.y + this.player.h) > obstacle.y) &&
+//         ((obstacle.y + obstacle.h) > this.player.y)
       
-      ); //console.log(this.player, obstacle)
+//       ); //console.log(this.player, obstacle)
 
-      //console.log('el resultado parcial de ', obstacle, ' es ', resultadoParcial)
+//       //console.log('el resultado parcial de ', obstacle, ' es ', resultadoParcial)
 
-      if (resultadoParcial) this.deleteObstacle3(index);
+//       if (resultadoParcial) this.deleteObstacle3(index);
 
-      return resultadoParcial;
-    }.bind(this));
-    //console.log(resultado)
-    return resultado;
-}, 
-
-
-// borra los obstaculos cuando hay colisión DE JAY Z
-deleteObstacle3: function(index) {
-  //console.log('vamos a borrar el obstaculo en el indice ', index)
-  this.obstacles3.splice(index, 1)
-  console.log("he borrado el indice " + index)
-  },
+//       return resultadoParcial;
+//     }.bind(this));
+//     //console.log(resultado)
+//     return resultado;
+// }, 
 
 
+// // borra los obstaculos cuando hay colisión DE JAY Z
+// deleteObstacle3: function(index) {
+//   //console.log('vamos a borrar el obstaculo en el indice ', index)
+//   this.obstacles3.splice(index, 1)
+//   console.log("he borrado el indice " + index)
+//   },
 
-  //chequea si ha sucedido una colisión CON KANYE
-isCollision4: function () {
 
-  var resultado = this.obstacles4.some(function (obstacle, index) {
-    //console.log(this.player, obstacle)
-    var resultadoParcial = (
-        ((this.player.x + this.player.w) >= obstacle.x) &&
-        ((obstacle.x + obstacle.w) > this.player.x) &&
-        ((this.player.y + this.player.h) > obstacle.y) &&
-        ((obstacle.y + obstacle.h) > this.player.y)
+
+//   //chequea si ha sucedido una colisión CON KANYE
+// isCollision4: function () {
+
+//   var resultado = this.obstacles4.some(function (obstacle, index) {
+//     //console.log(this.player, obstacle)
+//     var resultadoParcial = (
+//         ((this.player.x + this.player.w) >= obstacle.x) &&
+//         ((obstacle.x + obstacle.w) > this.player.x) &&
+//         ((this.player.y + this.player.h) > obstacle.y) &&
+//         ((obstacle.y + obstacle.h) > this.player.y)
       
-      ); //console.log(this.player, obstacle)
+//       ); //console.log(this.player, obstacle)
 
-      //console.log('el resultado parcial de ', obstacle, ' es ', resultadoParcial)
+//       //console.log('el resultado parcial de ', obstacle, ' es ', resultadoParcial)
 
-      if (resultadoParcial) this.deleteObstacle4(index);
+//       if (resultadoParcial) this.deleteObstacle4(index);
 
-      return resultadoParcial;
-    }.bind(this));
-    //console.log(resultado)
-    return resultado;
-}, 
+//       return resultadoParcial;
+//     }.bind(this));
+//     //console.log(resultado)
+//     return resultado;
+// }, 
 
 
-// borra los obstaculos cuando hay colisión DE KANYE
-deleteObstacle4: function(index) {
-  //console.log('vamos a borrar el obstaculo en el indice ', index)
-  this.obstacles4.splice(index, 1)
-  console.log("he borrado el indice " + index)
-  },
+// // borra los obstaculos cuando hay colisión DE KANYE
+// deleteObstacle4: function(index) {
+//   //console.log('vamos a borrar el obstaculo en el indice ', index)
+//   this.obstacles4.splice(index, 1)
+//   console.log("he borrado el indice " + index)
+//   },
 
 
 
@@ -290,6 +298,14 @@ deleteObstacle4: function(index) {
   clear: function () {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   },
+
+  checkScore: function() {
+    if (this.score >= this.scoreObj) {
+      this.publicBackground.animated = true
+      this.scoreObj += 40;
+    } 
+
+  }
 
 
   

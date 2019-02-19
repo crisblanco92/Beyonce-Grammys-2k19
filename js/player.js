@@ -12,10 +12,12 @@ function Player(game) {
   this.x = this.x0
 
   this.img = new Image();
-  this.img.src = 'img/beyonce.png';
+  this.img.src = 'img/bframes.png';
 
-  // this.imagejump = new Image();
-  // this.img.src = 'img/jayz.png'
+
+  // número de imágenes diferentes
+  this.img.frames = 2;
+  this.img.frameIndex = 0;
 
 
 
@@ -32,23 +34,20 @@ function Player(game) {
 
 Player.prototype.draw = function() {
   this.game.ctx.drawImage(
-  this.img,
-  this.x,
-  this.y,
-  this.w,
-  this.h
+    this.img,
+    this.img.frameIndex * Math.floor(this.img.width / this.img.frames),
+    0,
+    Math.floor(this.img.width / this.img.frames),
+    this.img.height,
+    this.x,
+    this.y,
+    this.w,
+    this.h
   );
+
+  //this.animateImg();
  // console.log(this.Player)
   }
-
-
-// Player.prototype.drawImageJump = function(){
-//   this.game.ctx.drawImage(
-//     this.imagejump
-//   )
-
-// }
-
 
 Player.prototype._moveBeyonce = function() {
 
@@ -56,10 +55,12 @@ Player.prototype._moveBeyonce = function() {
         switch (e.keyCode) {
             case 39:
                 this._moveRight()
+                //this.animateImg();
                 //this._refresh()
                 break;
             case 37:
                 this._moveLeft()
+                //this.animateImg();
                 //this._refresh()
                 break;
             // case 38:
@@ -67,20 +68,22 @@ Player.prototype._moveBeyonce = function() {
             //     break;
 
         }
+
+        this.img.frameIndex += 1;
+        if (this.img.frameIndex > 1) this.img.frameIndex = 0;
     }.bind(this)
 }
 
 
 Player.prototype._moveLeft = function() {
-  this.x -= 30
-  if (this.y < 0){
-    console.log("que te sales")
-  }
+  this.x -= 40
+  //this.animateImg();
   // this._refresh()
 }
 
 Player.prototype._moveRight = function() {
-  this.x += 30
+  this.x += 40
+  //this.animateImg();
   // this._refresh()
 }
 
@@ -89,6 +92,9 @@ Player.prototype._moveRight = function() {
 // }
 
 Player.prototype.move = function() {
+  
+  
+
   // Aumenta la velocidad en el eje y.
   var gravity = 0.3;
 
@@ -139,13 +145,13 @@ Player.prototype.setListeners = function() {
 
 
 
-// Player.prototype.animateImg = function() {
-//   // se va cambiando el frame. Cuanto mayor es el módulo, mas lento se mueve el personaje
-//   if (this.game.framesCounter % 6 === 0) {
-//     this.img.frameIndex += 1;
+Player.prototype.animateImg = function() {
+  // se va cambiando el frame. Cuanto mayor es el módulo, mas lento se mueve el personaje
+  if (this.game.framesCounter % 4 === 0) {
+    this.img.frameIndex += 1;
 
-//     // Si el frame es el último, se vuelve al primero
-//     if (this.img.frameIndex > 2) this.img.frameIndex = 0;
-//   }
-// };
+    // Si el frame es el último, se vuelve al primero
+    if (this.img.frameIndex > 1) this.img.frameIndex = 0;
+  }
+};
 

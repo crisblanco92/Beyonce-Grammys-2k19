@@ -5,10 +5,10 @@ function Obstacle3(game) {
   this.w = 60;
   this.h = 80;
 
-  this.dx = -1;
+  this.dy = -1;
 
-  this.x = 30;
-  this.y = Math.floor(Math.random() * this.game.h);
+  this.x = Math.floor(Math.random() * this.game.w);
+  this.y = 30;
 
   this.img = new Image()
   this.img.src = "img/jayz.png"

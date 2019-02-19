@@ -7,11 +7,13 @@ function Obstacle(game) {
 
   this.dy = -2;
 
-  this.x = Math.floor(Math.random() * this.game.w/2);
+  this.x = Math.floor(Math.random() * this.game.w / 2);
   this.y = 30;
 
   this.img = new Image()
   this.img.src = "img/grammy.png"
+
+  this.score = 20;
 
   // this.x = this.game.canvas.width;
   // this.y = this.game.player.y0 + this.game.player.h - this.h - 5;
