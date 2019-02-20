@@ -13,6 +13,10 @@ function PublicBackground(game) {
 
   this.animated = false;
   this.moveUp = true
+
+  this.audio = new Audio();
+  this.audio.src = "img/crowd.mp3"
+  
 }
 
 PublicBackground.prototype.draw = function() {
@@ -20,6 +24,7 @@ PublicBackground.prototype.draw = function() {
       if (this.moveUp) {
         this.y--
         console.log("subiendo")
+
       } else {
         this.y++
         console.log("bajando")

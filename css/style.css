@@ -1,5 +1,5 @@
 *{
-    margin: 0 auto;
+    margin: 0;
     overflow: hidden;
 }
 
@@ -13,22 +13,26 @@ body {
 body button {
     font-family: 'VT323', monospace;
     font-size: 30px;
-    background-color: yellow;
+    background-color: #f6c435;
     color: #000;
-    padding: 10px 20px;
-    border: 30;
+    padding: 9px 72px;
+    margin-top: 554px;
+    margin-left: 130px;
+    /* border: 30; */
 
     box-shadow: 10;
-    border-radius: 5px;
-    margin-bottom: 20px;
+    
+    position: absolute;
   }
 
+  
 
-/* 
 .inicio {
-
-    width: 500px;
-    height: 500px;
-    background-color: red;
+  background-image: url(../img/inicio.png);
+  background-size: cover;
+  background-repeat: repeat;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+  
 }
-   */

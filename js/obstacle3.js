@@ -13,9 +13,11 @@ function Obstacle3(game) {
   this.img = new Image()
   this.img.src = "img/microphone.png"
 
-  // this.x = this.game.canvas.width;
-  // this.y = this.game.player.y0 + this.game.player.h - this.h - 5;
+  this.audio = new Audio();
+  this.audio.src = "img/microphoneSound.mp3"
 }
+
+
 
 Obstacle3.prototype.draw = function() {
 
@@ -27,7 +29,6 @@ Obstacle3.prototype.draw = function() {
     this.w,
     this.h
     );
-  //this.game.ctx.fillRect(this.x, this.y, this.w, this.h);
 
 };
 

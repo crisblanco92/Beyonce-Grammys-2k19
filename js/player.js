@@ -19,8 +19,8 @@ function Player(game) {
   this.img.frames = 2;
   this.img.frameIndex = 0;
 
-  this.framesY = 2;
-  this.frameYIndex = 1;
+  this.img.framesY = 2;
+  this.img.frameYIndex = 0;
 
 
 
@@ -30,21 +30,23 @@ function Player(game) {
 
   this.vy = 1;
 
-  this.movingLeft = false;
 
   // this.bullets = [];
 
   this.setListeners();
+
+  this.audio = new Audio();
+  this.audio.src = "img/jump.mp3"
 }
 
 Player.prototype.draw = function() {
-  console.log(this.frameYIndex, this.framesY, this.img.height)
+  console.log(this.img.frameYIndex, this.img.framesY, this.img.height)
   this.game.ctx.drawImage(
     this.img,
     this.img.frameIndex * Math.floor(this.img.width / this.img.frames),
-    this.frameYIndex * Math.floor(this.img.height / this.framesY),
+    this.img.frameYIndex * Math.floor(this.img.height / this.img.framesY),
     Math.floor(this.img.width / this.img.frames),
-    this.img.height,
+    Math.floor(this.img.height / this.img.framesY),
     this.x,
     this.y,
     this.w,
@@ -62,11 +64,11 @@ Player.prototype._moveBeyonce = function() {
         switch (e.keyCode) {
             case 39:
                 this._moveRight();
-                this.movingLeft = false;
+                this.img.frameYIndex = 0;
                 break;
             case 37:
-                this._moveLeft()
-                this.movingLeft = true;
+                this._moveLeft();
+                this.img.frameYIndex = 1;
                 break;
             // case 38:
             //     this._moveUp()
@@ -121,6 +123,8 @@ Player.prototype.setListeners = function() {
     if (event.keyCode === this.game.keys.TOP_KEY && this.y == this.y0) {
       this.y -= 5;
       this.vy -= 15;
+      this.audio.play();
+
     } else if (event.keyCode == this.game.keys.SPACE) {
       this.move();
     }

@@ -13,8 +13,9 @@ function Obstacle2(game) {
   this.img = new Image()
   this.img.src = "img/poop.png"
 
-  // this.x = this.game.canvas.width;
-  // this.y = this.game.player.y0 + this.game.player.h - this.h - 5;
+  this.audio = new Audio();
+  this.audio.src = "img/emojiSound.mp3"
+
 }
 
 Obstacle2.prototype.draw = function() {

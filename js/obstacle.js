@@ -15,8 +15,9 @@ function Obstacle(game) {
 
   this.score = 20;
 
-  // this.x = this.game.canvas.width;
-  // this.y = this.game.player.y0 + this.game.player.h - this.h - 5;
+  this.audio = new Audio();
+  this.audio.src = "img/grammySound.mp3"
+
 }
 
 Obstacle.prototype.draw = function() {

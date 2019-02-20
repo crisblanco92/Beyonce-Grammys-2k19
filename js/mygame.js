@@ -24,7 +24,7 @@ var Game = {
   start: function () {
     
     this.reset();
-
+    this.mainAudio.play();
 
     this.interval = setInterval(function () {
       this.clear();
@@ -56,7 +56,7 @@ var Game = {
 
 
       if (this.isCollision(this.obstaclesGrammy)) {
-        this.score += 20
+        this.score += 20;
         return
       }
 
@@ -66,15 +66,18 @@ var Game = {
       }  
 
       if(this.isCollision(this.obstaclesMicrophone)){
-        this.score += 50
+        this.score += 50;
         return 
       }  
 
       if(this.isCollision(this.obstaclesKanye)){
         this.gameOver();
+        // this.obstaclesKanye.audio.play();
       }  
 
       this.checkScore();
+
+
 
 
     
@@ -87,11 +90,15 @@ var Game = {
   },
 
   gameOver: function () {
+
     this.stop();
+    this.mainAudio.pause();
+
 
     if (confirm("GAME OVER. Play again?")) {
       this.reset();
       this.start();
+      
     }
   },
 
@@ -110,6 +117,12 @@ var Game = {
     this.obstaclesKanye = []
     this.score = 0;
     this.scoreObj = 60; // OBJETIVO
+    this.audio = new Audio();
+    this.audio.src = "img/boton.mp3"
+    this.mainAudio = new Audio();
+    this.mainAudio.src = "img/crazy-in-love2.mp3"
+    
+
   },
 
 
@@ -179,7 +192,8 @@ var Game = {
     // borra los obstaculos cuando hay colisión DE GRAMMYS BUENOS
   deleteObstacle: function(index, collision) {
     //console.log('vamos a borrar el obstaculo en el indice ', index)
-    collision.splice(index, 1)
+    var obstacle = collision.splice(index, 1);
+    obstacle[0].audio.play();
     //console.log("he borrado el indice " + index)
     },
   
@@ -198,6 +212,7 @@ var Game = {
   checkScore: function() {
     if (this.score >= this.scoreObj) {
       this.publicBackground.animated = true
+      this.publicBackground.audio.play();
       this.scoreObj += 60;
     } 
 
