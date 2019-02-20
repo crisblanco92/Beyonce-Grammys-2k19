@@ -12,20 +12,25 @@ function Player(game) {
   this.x = this.x0
 
   this.img = new Image();
-  this.img.src = 'img/bframes.png';
+  this.img.src = 'img/frames.png';
 
 
   // número de imágenes diferentes
   this.img.frames = 2;
   this.img.frameIndex = 0;
 
+  this.framesY = 2;
+  this.frameYIndex = 1;
+
 
 
   // medidas de la imagen a representar en el canvas
-  this.w = 113;
+  this.w = 106;
   this.h = 141;
 
   this.vy = 1;
+
+  this.movingLeft = false;
 
   // this.bullets = [];
 
@@ -33,10 +38,11 @@ function Player(game) {
 }
 
 Player.prototype.draw = function() {
+  console.log(this.frameYIndex, this.framesY, this.img.height)
   this.game.ctx.drawImage(
     this.img,
     this.img.frameIndex * Math.floor(this.img.width / this.img.frames),
-    0,
+    this.frameYIndex * Math.floor(this.img.height / this.framesY),
     Math.floor(this.img.width / this.img.frames),
     this.img.height,
     this.x,
@@ -44,6 +50,7 @@ Player.prototype.draw = function() {
     this.w,
     this.h
   );
+
 
   //this.animateImg();
  // console.log(this.Player)
@@ -54,14 +61,12 @@ Player.prototype._moveBeyonce = function() {
     document.onkeydown = function(e) {
         switch (e.keyCode) {
             case 39:
-                this._moveRight()
-                //this.animateImg();
-                //this._refresh()
+                this._moveRight();
+                this.movingLeft = false;
                 break;
             case 37:
                 this._moveLeft()
-                //this.animateImg();
-                //this._refresh()
+                this.movingLeft = true;
                 break;
             // case 38:
             //     this._moveUp()
@@ -76,15 +81,17 @@ Player.prototype._moveBeyonce = function() {
 
 
 Player.prototype._moveLeft = function() {
-  this.x -= 40
-  //this.animateImg();
-  // this._refresh()
+  if (this.x > 30) {
+    this.x -= 40
+  }
+  
 }
 
 Player.prototype._moveRight = function() {
+  if ((this.x + this.w) < Game.w - 30) {
   this.x += 40
-  //this.animateImg();
-  // this._refresh()
+  }
+ 
 }
 
 // Player.prototype._moveUp = function () {

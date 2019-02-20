@@ -12,7 +12,6 @@ function PublicBackground(game) {
   this.vy = 20;
 
   this.animated = false;
-
   this.moveUp = true
 }
 

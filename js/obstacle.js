@@ -3,11 +3,11 @@ function Obstacle(game) {
   this.game = game;
 
   this.w = 50;
-  this.h = 58;
+  this.h = 60;
 
   this.dy = -2;
 
-  this.x = Math.floor(Math.random() * this.game.w / 2);
+  this.x = Math.floor(Math.random() * ((this.game.w * 0.8) - (this.game.w * 0.2))) + this.game.w * 0.2;
   this.y = 30;
 
   this.img = new Image()
