@@ -2,6 +2,7 @@ var Game = {
   canvas: undefined,
   ctx: undefined,
   fps: 60,
+  counter: 60,
   scoreBoard: undefined,
   keys: {
     TOP_KEY : 38,
@@ -25,10 +26,16 @@ var Game = {
     
     this.reset();
     this.mainAudio.play();
+    this.countDown();
+    setTimeout(function(){
+
+      this.gameOver();
+    }.bind(this), 60000)
+    ;
+
 
     this.interval = setInterval(function () {
       this.clear();
-
       this.framesCounter++;
       // controlamos que frameCounter no sea superior a 1000
       if (this.framesCounter > 1000) {
@@ -72,7 +79,6 @@ var Game = {
 
       if(this.isCollision(this.obstaclesKanye)){
         this.gameOver();
-        // this.obstaclesKanye.audio.play();
       }  
 
       this.checkScore();
@@ -93,13 +99,9 @@ var Game = {
 
     this.stop();
     this.mainAudio.pause();
-
-
-    if (confirm("GAME OVER. Play again?")) {
+    document.getElementsByClassName("game-over")[0].style.display = "block"
       this.reset();
-      this.start();
       
-    }
   },
 
 
@@ -118,10 +120,12 @@ var Game = {
     this.score = 0;
     this.scoreObj = 60; // OBJETIVO
     this.audio = new Audio();
-    this.audio.src = "img/boton.mp3"
+    this.audio.src = "img/button.mp3"
     this.mainAudio = new Audio();
-    this.mainAudio.src = "img/crazy-in-love2.mp3"
+    this.mainAudio.src = "img/8bitcrazyinlove.mp3"
+    this.counter = 60;
     
+    clearInterval(this.interval);
 
   },
 
@@ -137,6 +141,7 @@ var Game = {
     this.obstaclesKanye.forEach(function (obstacle) { obstacle.draw(); });
     this.publicBackground.draw();
     this.drawScore();
+    this.drawCounter();
     
   },
 
@@ -170,7 +175,7 @@ var Game = {
   },
 
 
-    //chequea si ha sucedido una colisión CON GRAMMYS BUENOS
+    //chequea si ha sucedido una colisión
   isCollision: function (collision) {
       var resultado = collision.some(function (obstacle, index) {
         //console.log(this.player, obstacle)
@@ -189,7 +194,7 @@ var Game = {
           return resultado;
     },
 
-    // borra los obstaculos cuando hay colisión DE GRAMMYS BUENOS
+    // borra los obstaculos cuando hay colisión 
   deleteObstacle: function(index, collision) {
     //console.log('vamos a borrar el obstaculo en el indice ', index)
     var obstacle = collision.splice(index, 1);
@@ -203,6 +208,24 @@ var Game = {
     this.scoreBoard.update(this.score, this.ctx)
   },
 
+  //pinta el contador
+  drawCounter: function () {
+    this.ctx.fillText(this.counter, this.w - 220 , 50, 100, 100)
+  },
+
+
+  countDown: function () {
+    this.intervalcounter = setInterval(() => {
+      this.counter-- 
+    },1000)
+
+    if(this.counter == 0) {
+  
+      this.clearInterval(this.intervalCounter)
+      this.gameOver()
+    }
+  },
+
 
 
   clear: function () {
@@ -213,6 +236,7 @@ var Game = {
     if (this.score >= this.scoreObj) {
       this.publicBackground.animated = true
       this.publicBackground.audio.play();
+      this.publicBackground.lights = true
       this.scoreObj += 60;
     } 
 

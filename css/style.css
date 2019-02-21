@@ -6,7 +6,7 @@
 body {
     text-align: center;
     font-family: 'VT323', monospace;
-  
+    cursor: url(../img/cursor.gif), pointer;
   }
 
   
@@ -15,9 +15,9 @@ body button {
     font-size: 30px;
     background-color: #f6c435;
     color: #000;
-    padding: 9px 72px;
-    margin-top: 554px;
-    margin-left: 130px;
+    padding: 9px 55px;
+    margin-top: 589px;
+    margin-left: 301px;
     /* border: 30; */
 
     box-shadow: 10;
@@ -34,5 +34,145 @@ body button {
   background-position: center;
   width: 100vw;
   height: 100vh;
+
+}
+
+
+
+.game-over {
+  background-image: url(../img/gameover.png);
+  background-size: cover;
+  background-repeat: repeat;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+  display:none;
+  z-index: 9;
+  position: absolute;
+  top: 0;
+}
+
+#game-board {
+  position: absolute;
+  top: 0;
+
+}
+
+
+
+#reset-button {
+
+ font-family: 'VT323', monospace;
+    font-size: 30px;
+    background-color: #f6c435;
+    color: #000;
+    padding: 18px 40px;
+    margin-top: 632px;
+    margin-left: -107px;
+
+    box-shadow: 10;
+    
+    position: absolute;
+
+    z-index: 99;
+}
+
+
+
+.fondo img{
+  margin-top: 210px;
+  margin-left: -700px;
+  width: 470px;
+  height: 450px;
+    transition: all 1s ease;
   
 }
+  .fondo img:hover{
+     width: 520px;
+     height: 500px;
+     transition: all 2s ease;
+   }
+
+
+  
+.fondo2 img{
+  position: absolute;
+  margin-top: 200px;
+  margin-left: -600px;
+  height: 450px;
+  transition: all 1s ease;
+  transform: rotateZ(15deg)
+}
+  .fondo2 img:hover{
+     
+     transition: all 2s ease;
+     transform: rotateZ(-30deg)
+
+   }
+
+
+   .fondo3 img{
+    position: absolute;
+    margin-top: 200px;
+    margin-left: -240px;
+    height: 450px;
+    transition: all 1s ease;
+    transform: rotateZ(0deg);
+    z-index: 99;
+  }
+    .fondo3 img:hover{
+        /* margin-top: 2000px; */
+
+       transition: all 1s ease;
+       transform: rotateZ(-180deg);
+       
+  
+     }  
+
+
+/* .tweet {
+  left: 550px;
+  position: absolute;
+  top: 750px;
+  padding: 20px;
+  background-color: #fff8c6;
+} */
+  
+
+.container {
+  position: relative;
+}
+
+#textar{
+  font-family: 'Courier New', Courier, monospace;
+  margin-top: 750px;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 14%;
+  height: 60px;
+  padding: 12px 5px;
+  box-sizing: border-box;
+  border: 3px solid #000;
+  border-radius: 4px;
+  background-color: #f6c435;
+  font-size: 16px;
+  outline: none;
+}
+
+#button{
+  position: absolute;
+  bottom: 8px;
+  width : 110px;
+  height : 50px;
+  margin-left: 0;
+  background-color: #f6c435;
+  color: black;
+  border: 3px solid #000; 
+}
+
+#button:hover {
+  background-color: #CCCCCC; 
+  color: white;
+}
+
+

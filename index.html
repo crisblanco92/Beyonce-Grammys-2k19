@@ -20,6 +20,7 @@
   <script type="text/javascript" src="js/mygame.js"></script>
 
   <!-- <script type="text/javascript" src="js/index.js"></script> -->
+  <link rel="shortcut icon" href="img/cursor.gif">
 
   <link rel="stylesheet" href="css/style.css"> 
 
@@ -27,20 +28,55 @@
 
 </head>
 <body>
-  
+    <!-- <audio src="img/start.mp3" id="my_audio" loop="loop" autoplay="autoplay"></audio> -->
 
-  <img src="" alt="" style="width:50%;">
   <div class="inicio">
-    <div class="fondo">
+      <div class="fondo2">
+          <img src="img/animacion2.png">
+      </div>
+  
+      <div class="fondo">
+        <img src="img/animacion1.png">
         <button id="start-button">PLAY</button>
-    </div>
-
+      </div>
+    
   </div>
 
+
+  <div class="game-over">
+      <div class="fondo-game-over">
+          <div class="fondo3">
+            <img src="img/animacion2.png">
+          </div>
+          <button id="reset-button">PLAY AGAIN?</button>
+
+        </div>
+        <!-- <input type="text" id="name" name="name" placeholder="Tweet me" required
+          minlength="4" size="100" class="tweet">  -->
+
+          <div class="container">
+  
+              <form target="_blank" name="tweet" action="https://twitter.com/share" method="get"> 
+              <input type="hidden" name="original_referer" value="http://twitter.com/CrisWhite3"> 
+              <input type="hidden" name="source" value="tweetbutton"> 
+              <!--must provide twitter with a url string that has characters in it or else they will add the current url into the tweet-->
+              <input type="hidden" name="url" value="foobartheroobar">
+                
+               <textarea id="textar" name="text" maxlength="140"></textarea>
+            
+              <input type="submit" value="Tweet your score!" id="button"/>    
+            </form>
+              
+            </div>
+
+          
+  </div>
 
   <div id="game-board">
     <canvas id="canvas"></canvas>
   </div>
+
+  
   
 
 </body>

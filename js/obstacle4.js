@@ -14,7 +14,7 @@ function Obstacle4(game) {
   this.img.src = "img/kanye.png"
 
   this.audio = new Audio()
-  this.audio.src = "img/kanyesound.mp3"
+  this.audio.src = "img/booSound.mp3"
 
   // this.x = this.game.canvas.width;
   // this.y = this.game.player.y0 + this.game.player.h - this.h - 5;
