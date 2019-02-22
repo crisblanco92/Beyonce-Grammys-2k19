@@ -6,7 +6,7 @@
 body {
     text-align: center;
     font-family: 'VT323', monospace;
-    cursor: url(../img/cursor.gif), pointer;
+    cursor: url(img/cursor.png), pointer;
   }
 
   
