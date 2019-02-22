@@ -1,38 +1,26 @@
-  checkScore: function() {
-    if (this.score >= this.scoreObj) {
-      this.publicBackground.animated = true
-      this.publicBackground.audio.play();
-      this.publicBackground.lights = true
-      this.scoreObj += 60;
+    //chequea si ha sucedido una colisión
+    isCollision: function (collision) {
+      var resultado = collision.some(function (obstacle, index) {
+        //console.log(this.player, obstacle)
+        var resultadoParcial = (
+            ((this.player.x + this.player.w) >= obstacle.x) &&
+            ((obstacle.x + obstacle.w) > this.player.x) &&
+            ((this.player.y + this.player.h) > obstacle.y) &&
+            ((obstacle.y + obstacle.h) > this.player.y)
+          
+          ); //console.log(this.player, obstacle)
+          //console.log('el resultado parcial de ', obstacle, ' es ', resultadoParcial)
+          if (resultadoParcial) this.deleteObstacle(index, collision);
+          return resultadoParcial;
+      }.bind(this));
+        //console.log(resultado)
+          return resultado;
+    },
+
+    // borra los obstaculos cuando hay colisión 
+  deleteObstacle: function(index, collision) {
+    //console.log('vamos a borrar el obstaculo en el indice ', index)
+    var obstacle = collision.splice(index, 1);
+    obstacle[0].audio.play();
+    //console.log("he borrado el indice " + index)
     }
-  } 
-
-
-//function PublicBackground(game)
-  this.animated = false;
-  this.moveUp = true
-
-
-PublicBackground.prototype.draw = function() {
-  if (this.animated) {
-    //this.lights.style.display = "block"
-    this.game.ctx.drawImage(this.lightImage, 0, 0, this.game.canvas.width, this.game.canvas.height)
-    //console.log("focos")  
-    if (this.moveUp) {
-        this.y--
-        //console.log("subiendo")
-
-      } else {
-        this.y++
-        //console.log("bajando")
-      } 
-      if(this.y === 50) {
-        this.moveUp = false
-        //console.log("cambio")
-      } else if (this.y === 200) {
-        this.animated = false
-        //console.log("estoy abajo otra vez")
-        this.moveUp = true
-      }
-  }
- 
