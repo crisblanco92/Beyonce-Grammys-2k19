@@ -122,7 +122,7 @@ var Game = {
     this.audio = new Audio();
     this.audio.src = "img/button.mp3"
     this.mainAudio = new Audio();
-    this.mainAudio.src = "img/8bitcrazyinlove.mp3"
+    this.mainAudio.src = "img/crazyinlove8bit.mp3"
     this.counter = 60;
     
     clearInterval(this.interval);

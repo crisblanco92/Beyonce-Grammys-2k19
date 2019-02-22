@@ -139,11 +139,11 @@ body button {
 } */
   
 
-.container {
+/* .container {
   position: relative;
-}
+} */
 
-#textar{
+/* #textar{
   font-family: 'Courier New', Courier, monospace;
   margin-top: 750px;
   margin-left: 5px;
@@ -160,14 +160,15 @@ body button {
 }
 
 #button{
+  font-family: 'Courier New', Courier, monospace;
   position: absolute;
-  bottom: 8px;
-  width : 110px;
-  height : 50px;
+  bottom: 40px;
+  width : 130px;
+  height : 57px;
   margin-left: 0;
   background-color: #f6c435;
   color: black;
-  border: 3px solid #000; 
+  border: 1px solid #000; 
 }
 
 #button:hover {
@@ -175,4 +176,4 @@ body button {
   color: white;
 }
 
-
+ */

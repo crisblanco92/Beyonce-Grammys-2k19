@@ -1,6 +1,6 @@
 window.onload = function() {
   // var audio =  document.getElementById("my_audio").play();
-  var audio = new Audio("img/start2.mp3")
+  var audio = new Audio("img/loveontop8bit.mp3")
   setTimeout(function(){
   audio.play();
   },2000)
